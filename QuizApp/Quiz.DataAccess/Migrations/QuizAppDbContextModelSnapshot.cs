@@ -49,7 +49,7 @@ namespace Quiz.DataAccess.Migrations
                     b.HasIndex("QuestionId", "OrderIndex")
                         .IsUnique();
 
-                    b.ToTable("AnswerOptions");
+                    b.ToTable("AnswerOptions", (string)null);
                 });
 
             modelBuilder.Entity("Quiz.DataAccess.Models.AppUser", b =>
@@ -71,7 +71,7 @@ namespace Quiz.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("AppUsers");
+                    b.ToTable("AppUsers", (string)null);
                 });
 
             modelBuilder.Entity("Quiz.DataAccess.Models.ParticipantAnswer", b =>
@@ -112,7 +112,7 @@ namespace Quiz.DataAccess.Migrations
                     b.HasIndex("SessionParticipantId", "QuestionId")
                         .IsUnique();
 
-                    b.ToTable("ParticipantAnswers");
+                    b.ToTable("ParticipantAnswers", (string)null);
                 });
 
             modelBuilder.Entity("Quiz.DataAccess.Models.Question", b =>
@@ -142,7 +142,7 @@ namespace Quiz.DataAccess.Migrations
                     b.HasIndex("QuizId", "OrderIndex")
                         .IsUnique();
 
-                    b.ToTable("Questions");
+                    b.ToTable("Questions", (string)null);
                 });
 
             modelBuilder.Entity("Quiz.DataAccess.Models.Quiz", b =>
@@ -168,7 +168,7 @@ namespace Quiz.DataAccess.Migrations
 
                     b.HasIndex("CreatedByUserId");
 
-                    b.ToTable("Quizzes");
+                    b.ToTable("Quizzes", (string)null);
                 });
 
             modelBuilder.Entity("Quiz.DataAccess.Models.QuizSession", b =>
@@ -211,7 +211,7 @@ namespace Quiz.DataAccess.Migrations
 
                     b.HasIndex("QuizId");
 
-                    b.ToTable("QuizSessions");
+                    b.ToTable("QuizSessions", (string)null);
                 });
 
             modelBuilder.Entity("Quiz.DataAccess.Models.SessionParticipant", b =>
@@ -255,7 +255,7 @@ namespace Quiz.DataAccess.Migrations
                     b.HasIndex("QuizSessionId", "Nickname")
                         .IsUnique();
 
-                    b.ToTable("SessionParticipants");
+                    b.ToTable("SessionParticipants", (string)null);
                 });
 
             modelBuilder.Entity("Quiz.DataAccess.Models.AnswerOption", b =>
