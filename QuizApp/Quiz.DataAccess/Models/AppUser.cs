@@ -1,10 +1,11 @@
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Identity;
 
 namespace Quiz.DataAccess.Models;
 
-public class AppUser
+public class AppUser : IdentityUser
 {
-    [Key] public int Id { get; set; }
+    [Key] public string Id { get; set; }
     
     [MaxLength(20)]
     [MinLength(3)]

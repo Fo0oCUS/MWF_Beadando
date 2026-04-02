@@ -1,9 +1,10 @@
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Quiz.DataAccess.Models;
 
 namespace Quiz.DataAccess.Services;
 
-public class QuizAppDbContext : DbContext
+public class QuizAppDbContext : IdentityDbContext<AppUser, UserRole, string>
 {
     public DbSet<AppUser> AppUsers { get; set; }
     public DbSet<Question> Questions { get; set; }

@@ -1,20 +1,12 @@
-using System.ComponentModel.DataAnnotations;
+namespace Shared.Models.Request;
 
-namespace Quiz.DataAccess.Models;
-
-public class ParticipantAnswer
+public class ParticipantAnswerRequestDto
 {
-    [Key]
-    public int Id { get; set; }
-
     public int SessionParticipantId { get; set; }
-    public SessionParticipant? SessionParticipant { get; set; }
 
     public int QuestionId { get; set; }
-    public Question? Question { get; set; }
 
     public int AnswerOptionId { get; set; }
-    public AnswerOption? AnswerOption { get; set; }
 
     public DateTime AnsweredAt { get; set; } = DateTime.UtcNow;
 

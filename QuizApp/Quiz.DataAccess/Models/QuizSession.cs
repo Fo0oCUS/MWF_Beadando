@@ -10,7 +10,8 @@ public class QuizSession
     public int QuizId { get; set; }
     public Quiz? Quiz { get;  set; }
 
-    public int HostUserId { get; set; }
+    [Required]
+    public string HostUserId { get; set; } = "";
     public AppUser? HostUser { get; set; }
     
     [Required]

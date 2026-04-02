@@ -9,9 +9,10 @@ public class Quiz
     [Required]
     [MaxLength(50)]
     [MinLength(3)]
-    public string Title { get; set; }
+    public string Title { get; set; } = "";
 
-    public int CreatedByUserId { get; set; }
+    [Required] 
+    public string CreatedByUserId { get; set; } = "";
     public AppUser? CreatedByUser { get; set; }
 
     public bool IsPublished { get;  set; }

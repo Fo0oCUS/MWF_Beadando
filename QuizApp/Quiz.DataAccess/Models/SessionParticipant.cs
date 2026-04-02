@@ -10,7 +10,8 @@ public class SessionParticipant
     public int QuizSessionId { get; set; }
     public QuizSession? QuizSession { get; set; }
 
-    public int UserId { get; set; }
+    [Required] 
+    public string UserId { get; set; } = "";
     public AppUser? User { get; set; }
 
     [Required]
