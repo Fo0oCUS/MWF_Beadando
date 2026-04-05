@@ -16,26 +16,56 @@ public class SessionParticipantService : ISessionParticipantService
         _userService = userService;
     }
 
-    public async Task<SessionParticipant> AddAsync(SessionParticipant sessionParticipant)
+    public async Task<SessionParticipant> JoinByCodeAsync(string joinCode, string nickname, string? userId)
     {
-        if (!_userService.CurrentUserOrAdmin(sessionParticipant.UserId!))
+        var normalizedNickname = nickname.Trim();
+        if (string.IsNullOrWhiteSpace(normalizedNickname))
         {
-            throw new UnauthorizedAccessException("You have no right to create this session participant.");
+            throw new ArgumentException("Nickname is required.");
         }
 
-        QuizSession? quizSession =
-            _context.QuizSessions.FirstOrDefault(x => x.Id == sessionParticipant.QuizSessionId, null);
+        if (userId != null && !_userService.CurrentUserOrAdmin(userId))
+        {
+            throw new UnauthorizedAccessException("You have no right to join with this user.");
+        }
+
+        QuizSession? quizSession = await _context.QuizSessions.FirstOrDefaultAsync(x => x.JoinCode == joinCode);
         if (quizSession == null)
         {
-            throw new EntityNotFoundException("Quiz session not found with id " + sessionParticipant.QuizSessionId);
+            throw new EntityNotFoundException("Quiz session not found with join code " + joinCode);
         }
-        
-        AppUser? appUser =
-            _context.AppUsers.FirstOrDefault(x => x.Id == sessionParticipant.UserId, null);
-        if (appUser == null)
+
+        if (quizSession.QuizSessionStatus == Models.Enums.QuizSessionStatus.Finished)
         {
-            throw new EntityNotFoundException("User not found with id " + sessionParticipant.QuizSessionId);
+            throw new AccessViolationException("This quiz session is already finished.");
         }
+
+        var existingParticipant = await _context.SessionParticipants
+            .FirstOrDefaultAsync(x => x.QuizSessionId == quizSession.Id && x.Nickname == normalizedNickname);
+
+        if (existingParticipant != null)
+        {
+            throw new InvalidOperationException("This nickname is already taken in the session.");
+        }
+
+        if (userId != null)
+        {
+            AppUser? appUser = await _context.AppUsers.FirstOrDefaultAsync(x => x.Id == userId);
+            if (appUser == null)
+            {
+                throw new EntityNotFoundException("User not found with id " + userId);
+            }
+        }
+
+        var sessionParticipant = new SessionParticipant
+        {
+            QuizSessionId = quizSession.Id,
+            QuizSession = quizSession,
+            UserId = userId,
+            Nickname = normalizedNickname,
+            IsConnected = true,
+            JoinedAt = DateTime.UtcNow,
+        };
 
         await _context.SessionParticipants.AddAsync(sessionParticipant);
         try
@@ -47,5 +77,16 @@ public class SessionParticipantService : ISessionParticipantService
         {
             throw new SaveFailedException("Failed to create quiz.", ex);
         }
+    }
+
+    public async Task<SessionParticipant> GetByIdAsync(int participantId)
+    {
+        var participant = await _context.SessionParticipants.FirstOrDefaultAsync(x => x.Id == participantId);
+        if (participant == null)
+        {
+            throw new EntityNotFoundException("Participant not found with id " + participantId);
+        }
+
+        return participant;
     }
 }

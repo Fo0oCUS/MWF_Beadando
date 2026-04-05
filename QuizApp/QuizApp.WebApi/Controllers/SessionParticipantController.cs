@@ -1,7 +1,5 @@
 using AutoMapper;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Quiz.DataAccess.Models;
 using Quiz.DataAccess.Services.Interfaces;
 using Shared.Models.Request;
 using Shared.Models.Responses;
@@ -9,32 +7,27 @@ using Shared.Models.Responses;
 namespace QuizApp.WebApi.Controllers;
 
 [ApiController]
-[Route("/sessionParticipant")]
+[Route("/session-participants")]
 public class SessionParticipantController : ControllerBase
 {
     private readonly ISessionParticipantService _sessionParticipantService;
-    private readonly IMapper _mapper;
     private readonly IUserService _userService;
+    private readonly IMapper _mapper;
 
-    public SessionParticipantController(ISessionParticipantService sessionParticipantService, IMapper mapper, IUserService userService)
+    public SessionParticipantController(ISessionParticipantService sessionParticipantService, IUserService userService, IMapper mapper)
     {
         _sessionParticipantService = sessionParticipantService;
-        _mapper = mapper;
         _userService = userService;
+        _mapper = mapper;
     }
-    
-    [HttpPost]
-    [ProducesResponseType(type: typeof(SessionParticipantResponseDto), statusCode: StatusCodes.Status201Created)]
-    public async Task<IActionResult> CreateSessionParticipant(
-        [FromBody] SessionParticipantRequestDto sessionParticipantRequestDto)
-    {
-        SessionParticipant sessionParticipant = _mapper.Map<SessionParticipant>(sessionParticipantRequestDto);
-        var userId = _userService.GetCurrentUserId();
-        sessionParticipant.UserId = userId;
 
-        await _sessionParticipantService.AddAsync(sessionParticipant);
-        var response = _mapper.Map<SessionParticipantResponseDto>(sessionParticipant);
-        
-        return CreatedAtAction(nameof(CreateSessionParticipant), new {Id = response.Id}, response);
+    [HttpPost("join")]
+    [ProducesResponseType(type: typeof(SessionJoinResponseDto), statusCode: StatusCodes.Status201Created)]
+    public async Task<IActionResult> JoinSession([FromBody] JoinSessionByCodeRequestDto request)
+    {
+        var participant = await _sessionParticipantService.JoinByCodeAsync(request.JoinCode, request.Nickname, _userService.GetCurrentUserId());
+        var response = _mapper.Map<SessionJoinResponseDto>(participant);
+
+        return StatusCode(StatusCodes.Status201Created, response);
     }
 }

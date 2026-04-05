@@ -33,7 +33,8 @@ public class ExceptionToProblemDetailsHandler : IExceptionHandler
                 StatusCodes.Status409Conflict),
             InvalidOperationException => await CreateProblemDetails(httpContext, exception,
                 StatusCodes.Status409Conflict),
-            _ => false
+            _ => await CreateProblemDetails(httpContext, exception,
+                StatusCodes.Status500InternalServerError)
         };
     }
 

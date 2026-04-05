@@ -4,5 +4,7 @@ namespace Quiz.DataAccess.Services.Interfaces;
 
 public interface ISessionParticipantService
 {
-    public Task<SessionParticipant> AddAsync(SessionParticipant sessionParticipant);
+    Task<SessionParticipant> JoinByCodeAsync(string joinCode, string nickname, string? userId);
+
+    Task<SessionParticipant> GetByIdAsync(int participantId);
 }

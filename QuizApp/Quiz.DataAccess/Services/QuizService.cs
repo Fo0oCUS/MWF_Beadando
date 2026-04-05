@@ -21,7 +21,10 @@ public class QuizService : IQuizService
 
     public async Task<Quiz> GetByIdAsync(int id)
     {
-        Quiz? quiz = await _context.Quizzes.FirstOrDefaultAsync(x => x.Id == id);
+        Quiz? quiz = await _context.Quizzes
+            .Include(x => x.Questions.OrderBy(q => q.OrderIndex))
+            .ThenInclude(x => x.AnswerOptions.OrderBy(a => a.OrderIndex))
+            .FirstOrDefaultAsync(x => x.Id == id);
         if (quiz == null) throw new EntityNotFoundException(nameof(Quiz));
         
         var user = await _userService.GetUserByIdAsync(quiz.CreatedByUserId);
@@ -43,7 +46,11 @@ public class QuizService : IQuizService
             throw new AccessViolationException("User not accessible");
         }
         
-        return await _context.Quizzes.Where(x => x.CreatedByUserId == id).ToListAsync();
+        return await _context.Quizzes
+            .Include(x => x.Questions)
+            .Where(x => x.CreatedByUserId == id)
+            .OrderByDescending(x => x.Id)
+            .ToListAsync();
     }
     
     public async Task<Quiz> AddAsync(Quiz quiz)

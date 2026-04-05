@@ -28,6 +28,7 @@ public class MappingProfile : Profile
 
         CreateMap<ParticipantAnswerRequestDto, ParticipantAnswer>(MemberList.Source);
 
+        
         // ENTITY -> RESPONSE DTO
 
         CreateMap<AppUser, AppUserResponseDto>(MemberList.Destination);
@@ -43,6 +44,22 @@ public class MappingProfile : Profile
         CreateMap<SessionParticipant, SessionParticipantResponseDto>(MemberList.Destination);
 
         CreateMap<ParticipantAnswer, ParticipantAnswerResponseDto>(MemberList.Destination);
+
+        CreateMap<Quiz.DataAccess.Models.Quiz, QuizSummaryResponseDto>(MemberList.Destination)
+            .ForMember(dest => dest.QuestionCount, opt => opt.MapFrom(src => src.Questions.Count));
+
+        CreateMap<Quiz.DataAccess.Models.Quiz, QuizDetailsResponseDto>(MemberList.Destination);
+        CreateMap<Question, QuizQuestionDetailsResponseDto>(MemberList.Destination);
+        CreateMap<AnswerOption, QuizAnswerOptionDetailsResponseDto>(MemberList.Destination);
+
+        CreateMap<SessionParticipant, SessionJoinResponseDto>(MemberList.Destination)
+            .ForMember(dest => dest.ParticipantId, opt => opt.MapFrom(src => src.Id))
+            .ForMember(dest => dest.SessionId, opt => opt.MapFrom(src => src.QuizSessionId))
+            .ForMember(dest => dest.JoinCode, opt => opt.MapFrom(src => src.QuizSession != null ? src.QuizSession.JoinCode : string.Empty));
+
+        CreateMap<AnswerOption, SessionAnswerOptionViewResponseDto>(MemberList.Destination);
+        CreateMap<Question, SessionQuestionViewResponseDto>(MemberList.Destination);
+        CreateMap<AnswerOption, SessionAnswerResultItemResponseDto>(MemberList.Destination)
+            .ForMember(dest => dest.AnswerOptionId, opt => opt.MapFrom(src => src.Id));
     }
-    
 }

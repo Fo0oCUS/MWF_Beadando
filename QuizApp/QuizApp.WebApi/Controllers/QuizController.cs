@@ -1,5 +1,3 @@
-
-
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -26,7 +24,7 @@ public class QuizController : ControllerBase
 
     [HttpPost]
     [Authorize]
-    [ProducesResponseType(statusCode:201, Type = typeof(QuizResponseDto))]
+    [ProducesResponseType(statusCode: StatusCodes.Status201Created, Type = typeof(QuizDetailsResponseDto))]
     public async Task<IActionResult> CreateQuiz([FromBody] QuizRequestDto quizRequestDto)
     {
         var quiz = _mapper.Map<Quiz.DataAccess.Models.Quiz>(quizRequestDto);
@@ -35,30 +33,31 @@ public class QuizController : ControllerBase
         
         var createdQuiz = await _quizService.AddAsync(quiz);
 
-        var response = _mapper.Map<QuizResponseDto>(createdQuiz);
+        var response = _mapper.Map<QuizDetailsResponseDto>(createdQuiz);
 
-        return CreatedAtAction(nameof(CreateQuiz), new { id = response.Id }, response);
+        return CreatedAtAction(nameof(GetQuizById), new { quizId = response.Id }, response);
     }
     
-    [HttpGet]
-    [Route("quizzes/{quizId}")]
-    [ProducesResponseType(statusCode: StatusCodes.Status200OK, type: typeof(QuizResponseDto))]
+    [HttpGet("{quizId}")]
+    [Authorize]
+    [ProducesResponseType(statusCode: StatusCodes.Status200OK, type: typeof(QuizDetailsResponseDto))]
     public async Task<IActionResult> GetQuizById([FromRoute] int quizId)
     {
         var quiz = await _quizService.GetByIdAsync(quizId);
 
-        var response = _mapper.Map<QuizResponseDto>(quiz);
+        var response = _mapper.Map<QuizDetailsResponseDto>(quiz);
         return Ok(response);
     }
 
-    [HttpGet]
-    [Route("/quizzes/{userId}")]
-    [ProducesResponseType(statusCode: StatusCodes.Status200OK, type: typeof(List<QuizResponseDto>))]
-    public async Task<IActionResult> GetUsersQuizzes([FromRoute] string userId)
+    [HttpGet("mine")]
+    [Authorize]
+    [ProducesResponseType(statusCode: StatusCodes.Status200OK, type: typeof(List<QuizSummaryResponseDto>))]
+    public async Task<IActionResult> GetMyQuizzes()
     {
+        var userId = _userService.GetCurrentUserId() ?? throw new UnauthorizedAccessException("User is not authenticated.");
         var quizzes = await _quizService.GetByUserIdAsync(userId);
 
-        var response = _mapper.Map<List<QuizResponseDto>>(quizzes);
+        var response = _mapper.Map<List<QuizSummaryResponseDto>>(quizzes);
         return Ok(response);
     }
 }

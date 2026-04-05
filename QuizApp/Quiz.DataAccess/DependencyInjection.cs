@@ -30,12 +30,12 @@ public static class DependencyInjection
             })
             .AddEntityFrameworkStores<QuizAppDbContext>()
             .AddDefaultTokenProviders();
-        
-        
+        services.AddHttpContextAccessor();
         services.AddScoped<IUserService, UserService>();
         services.AddScoped<IQuizService, QuizService>();
         services.AddScoped<ISessionParticipantService, SessionParticipantService>();
         services.AddScoped<IQuizSessionService, QuizSessionService>();
+        services.AddScoped<IParticipantAnswerService, ParticipantAnswerService>();
         
         return services;
     }

@@ -61,6 +61,16 @@ builder.Services.AddSwaggerGen(c =>
 
 builder.Services.AddDataAccess(builder.Configuration);
 builder.Services.AddAuthorization();
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("QuizWeb", policy =>
+    {
+        policy
+            .WithOrigins("http://localhost:5173", "https://localhost:5173")
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+    });
+});
 
 var jwtSection = builder.Configuration.GetSection("JwtSettings");
 var jwtSettings = jwtSection.Get<JwtSettings>() ?? throw new ArgumentNullException(nameof(JwtSettings));
@@ -101,6 +111,7 @@ if (app.Environment.IsDevelopment()) {
 }
 
 app.UseHttpsRedirection();
+app.UseCors("QuizWeb");
 
 app.UseAuthentication();
 app.UseAuthorization();
