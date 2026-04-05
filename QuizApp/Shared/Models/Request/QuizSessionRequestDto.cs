@@ -6,8 +6,6 @@ namespace Shared.Models.Request;
 public class QuizSessionRequestDto
 {
     public int QuizId { get; init; }
-
-    public required string HostUserId { get; init; }
     
     [StringLength(6, MinimumLength = 6, ErrorMessage = "Join code must be 6 characters long.")]
     public required string JoinCode { get; init; }

@@ -10,8 +10,7 @@ public class SessionParticipant
     public int QuizSessionId { get; set; }
     public QuizSession? QuizSession { get; set; }
 
-    [Required] 
-    public string UserId { get; set; } = "";
+    public string? UserId { get; set; }
     public AppUser? User { get; set; }
 
     [Required]
@@ -26,7 +25,7 @@ public class SessionParticipant
 
     public string? ConnectionId { get; set; }
 
-    public bool IsHost { get; set; } = false;
+    public bool IsHost { get; set; }
 
     public ICollection<ParticipantAnswer> ParticipantAnswers { get; set; } = new List<ParticipantAnswer>();
 }

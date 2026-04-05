@@ -3,16 +3,20 @@
   "WorkspaceRootPath": "G:\\GitHub\\MWF_Beadando\\QuizApp\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{E1B9D73F-D27A-4831-A73A-EBC954718431}|Quiz.DataAccess\\Quiz.DataAccess.csproj|g:\\github\\mwf_beadando\\quizapp\\quiz.dataaccess\\services\\dbinitializer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E1B9D73F-D27A-4831-A73A-EBC954718431}|Quiz.DataAccess\\Quiz.DataAccess.csproj|solutionrelative:quiz.dataaccess\\services\\dbinitializer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{E1B9D73F-D27A-4831-A73A-EBC954718431}|Quiz.DataAccess\\Quiz.DataAccess.csproj|g:\\github\\mwf_beadando\\quizapp\\quiz.dataaccess\\services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E1B9D73F-D27A-4831-A73A-EBC954718431}|Quiz.DataAccess\\Quiz.DataAccess.csproj|solutionrelative:quiz.dataaccess\\services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8ABA71B6-7EDB-42A3-9781-E48CB3E42042}|QuizApp.WebApi\\QuizApp.WebApi.csproj|g:\\github\\mwf_beadando\\quizapp\\quizapp.webapi\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8ABA71B6-7EDB-42A3-9781-E48CB3E42042}|QuizApp.WebApi\\QuizApp.WebApi.csproj|solutionrelative:quizapp.webapi\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E1B9D73F-D27A-4831-A73A-EBC954718431}|Quiz.DataAccess\\Quiz.DataAccess.csproj|g:\\github\\mwf_beadando\\quizapp\\quiz.dataaccess\\dbinitializer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E1B9D73F-D27A-4831-A73A-EBC954718431}|Quiz.DataAccess\\Quiz.DataAccess.csproj|solutionrelative:quiz.dataaccess\\dbinitializer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{03D69630-3471-4C98-880C-6673CE13209A}|Quiz.Console\\Quiz.Console.csproj|g:\\github\\mwf_beadando\\quizapp\\quiz.console\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{03D69630-3471-4C98-880C-6673CE13209A}|Quiz.Console\\Quiz.Console.csproj|solutionrelative:quiz.console\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E1B9D73F-D27A-4831-A73A-EBC954718431}|Quiz.DataAccess\\Quiz.DataAccess.csproj|g:\\github\\mwf_beadando\\quizapp\\quiz.dataaccess\\services\\dependencyinjection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E1B9D73F-D27A-4831-A73A-EBC954718431}|Quiz.DataAccess\\Quiz.DataAccess.csproj|solutionrelative:quiz.dataaccess\\services\\dependencyinjection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,19 +26,19 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 12,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "DbInitializer.cs",
-              "DocumentMoniker": "G:\\GitHub\\MWF_Beadando\\QuizApp\\Quiz.DataAccess\\Services\\DbInitializer.cs",
-              "RelativeDocumentMoniker": "Quiz.DataAccess\\Services\\DbInitializer.cs",
-              "ToolTip": "G:\\GitHub\\MWF_Beadando\\QuizApp\\Quiz.DataAccess\\Services\\DbInitializer.cs",
-              "RelativeToolTip": "Quiz.DataAccess\\Services\\DbInitializer.cs",
-              "ViewState": "AgIAAEIAAAAAAAAAAAAAAE0AAAAlAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "UsersController.cs",
+              "DocumentMoniker": "G:\\GitHub\\MWF_Beadando\\QuizApp\\QuizApp.WebApi\\Controllers\\UsersController.cs",
+              "RelativeDocumentMoniker": "QuizApp.WebApi\\Controllers\\UsersController.cs",
+              "ToolTip": "G:\\GitHub\\MWF_Beadando\\QuizApp\\QuizApp.WebApi\\Controllers\\UsersController.cs",
+              "RelativeToolTip": "QuizApp.WebApi\\Controllers\\UsersController.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAAB0AAAA4AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-02T10:47:56.87Z",
+              "WhenOpened": "2026-04-04T17:47:33.008Z",
               "EditorCaption": ""
             },
             {
@@ -83,28 +87,41 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "DependencyInjection.cs",
-              "DocumentMoniker": "G:\\GitHub\\MWF_Beadando\\QuizApp\\Quiz.DataAccess\\Services\\DependencyInjection.cs",
-              "RelativeDocumentMoniker": "Quiz.DataAccess\\Services\\DependencyInjection.cs",
-              "ToolTip": "G:\\GitHub\\MWF_Beadando\\QuizApp\\Quiz.DataAccess\\Services\\DependencyInjection.cs",
-              "RelativeToolTip": "Quiz.DataAccess\\Services\\DependencyInjection.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAABMAAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "UserService.cs",
+              "DocumentMoniker": "G:\\GitHub\\MWF_Beadando\\QuizApp\\Quiz.DataAccess\\Services\\UserService.cs",
+              "RelativeDocumentMoniker": "Quiz.DataAccess\\Services\\UserService.cs",
+              "ToolTip": "G:\\GitHub\\MWF_Beadando\\QuizApp\\Quiz.DataAccess\\Services\\UserService.cs",
+              "RelativeToolTip": "Quiz.DataAccess\\Services\\UserService.cs",
+              "ViewState": "AgIAACEAAAAAAAAAAAAAADMAAAAfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-02T10:46:35.699Z",
+              "WhenOpened": "2026-04-04T17:46:33.747Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "Program.cs",
               "DocumentMoniker": "G:\\GitHub\\MWF_Beadando\\QuizApp\\Quiz.Console\\Program.cs",
               "RelativeDocumentMoniker": "Quiz.Console\\Program.cs",
               "ToolTip": "G:\\GitHub\\MWF_Beadando\\QuizApp\\Quiz.Console\\Program.cs",
               "RelativeToolTip": "Quiz.Console\\Program.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAABYAAAAbAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACAAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-02T10:38:04.423Z",
+              "WhenOpened": "2026-04-04T17:30:32.526Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "DbInitializer.cs",
+              "DocumentMoniker": "G:\\GitHub\\MWF_Beadando\\QuizApp\\Quiz.DataAccess\\DbInitializer.cs",
+              "RelativeDocumentMoniker": "Quiz.DataAccess\\DbInitializer.cs",
+              "ToolTip": "G:\\GitHub\\MWF_Beadando\\QuizApp\\Quiz.DataAccess\\DbInitializer.cs",
+              "RelativeToolTip": "Quiz.DataAccess\\DbInitializer.cs",
+              "ViewState": "AgIAAKQAAAAAAAAAAAAAALQAAAAmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-04T17:26:01.381Z",
               "EditorCaption": ""
             }
           ]

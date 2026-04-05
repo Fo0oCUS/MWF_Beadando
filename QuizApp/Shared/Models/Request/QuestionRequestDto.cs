@@ -14,4 +14,6 @@ public class QuestionRequestDto
     [Range(1, int.MaxValue, ErrorMessage = "Time limit should be greater than 1.")]
     public int TimeLimitSeconds { get; init; }
 
+    [MinLength(2, ErrorMessage = "The question must have at least 2 answer choices.")]
+    public required ICollection<AnswerOptionRequestDto> AnswerOptions { get; init; }
 }

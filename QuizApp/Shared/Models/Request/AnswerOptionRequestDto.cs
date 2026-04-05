@@ -4,7 +4,6 @@ namespace Shared.Models.Request;
 
 public class AnswerOptionRequestDto
 {
-    public int QuestionId { get; init; }
 
     [MinLength(1, ErrorMessage = "Answer is too short. Minimum 1 characters.")]
     [MaxLength(255, ErrorMessage = "Answer is too long. Maximum 255 characters.")]

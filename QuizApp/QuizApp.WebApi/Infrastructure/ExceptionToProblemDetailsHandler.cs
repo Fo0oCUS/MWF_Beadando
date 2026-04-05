@@ -19,6 +19,8 @@ public class ExceptionToProblemDetailsHandler : IExceptionHandler
         {
             EntityNotFoundException => await CreateProblemDetails(httpContext, exception,
                 StatusCodes.Status404NotFound),
+            UnauthorizedAccessException => await CreateProblemDetails(httpContext, exception,
+                StatusCodes.Status403Forbidden),
             AccessViolationException => await CreateProblemDetails(httpContext, exception,
                 StatusCodes.Status403Forbidden),
             ArgumentOutOfRangeException => await CreateProblemDetails(httpContext, exception,

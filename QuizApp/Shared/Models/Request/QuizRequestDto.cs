@@ -8,7 +8,8 @@ public class QuizRequestDto
     [MinLength(3, ErrorMessage = "Quiz title is too short. Minimum 3 characters.")]
     public required string Title { get; init; }
 
-    public required string CreatedByUserId { get; init; }
-
     public bool IsPublished { get; init; }
+    
+    [MinLength(1, ErrorMessage = "The quiz must have at least one question in it.")]
+    public required ICollection<QuestionRequestDto> Questions { get; init; }
 }
