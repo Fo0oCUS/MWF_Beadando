@@ -91,13 +91,13 @@ export function QuizDetailView({
               className="secondary-button"
               onClick={() => navigate(`/session/${latestSession.sessionId}`)}
             >
-              Host nézet megnyitása
+              Legutóbbi kvíz megnyitása
             </button>
           </div>
           <div className="inline-stats">
-            <span className="pill">{latestSession.joinCode}</span>
-            <span className="pill muted">{formatStage(latestSession.stage)}</span>
-            <span className="pill">{latestSession.participantCount} résztvevő</span>
+            <span className="pill"> {latestSession.joinCode}</span>
+            <span className="pill muted"> {formatStage(latestSession.stage)}</span>
+            <span className="pill"> {latestSession.participantCount} résztvevő</span>
           </div>
         </div>
       ) : null}
@@ -114,7 +114,7 @@ export function QuizDetailView({
               {question.answerOptions.map((option) => (
                 <li key={option.id}>
                   <span>{option.text}</span>
-                  {option.isCorrect ? <strong>helyes</strong> : <span>opció</span>}
+                  {option.isCorrect ? <strong>Helyes válasz</strong> : <span>---</span>}
                 </li>
               ))}
             </ul>

@@ -65,7 +65,7 @@ export function ParticipantSessionView({
       }
       saveStoredParticipant(response.joinCode, stored)
       setParticipantState(stored)
-      onNotice({ tone: 'success', text: 'Csatlakozas rendben.' })
+      onNotice({ tone: 'success', text: 'Sikeres csatlakozás.' })
       const refreshed = await getParticipantSession(response.joinCode, response.participantId)
       setSessionState(refreshed)
     } catch (joinError) {
@@ -96,7 +96,7 @@ export function ParticipantSessionView({
       <section className="single-column">
         <div className="panel form-panel">
           <p className="eyebrow">Quiz code: {joinCode}</p>
-          <h2>Adj meg egy nicknevet a csatlakozashoz</h2>
+          <h2>Adj meg egy felhsználónevet a csatlakozáshoz.</h2>
           <form className="form-grid" onSubmit={handleJoin}>
             <label>
               Nicknev
@@ -117,9 +117,9 @@ export function ParticipantSessionView({
     )
   }
 
-  if (loading) return <div className="panel">Jatekallapot betoltese...</div>
+  if (loading) return <div className="panel">Kvíz betöltése...</div>
   if (error) return <div className="panel error-panel">{error}</div>
-  if (!sessionState) return <div className="panel error-panel">A session nem erheto el.</div>
+  if (!sessionState) return <div className="panel error-panel">A kvíz már nem elérhető.</div>
 
   const selectedAnswerOptionId = sessionState.viewer?.selectedAnswerOptionId ?? null
 
@@ -127,7 +127,6 @@ export function ParticipantSessionView({
     <section className="stack-layout">
       <div className="panel hero-panel">
         <div>
-          <p className="eyebrow">Resztvevoi nezet</p>
           <h2>{sessionState.quizTitle}</h2>
           <p>{participantState.nickname}</p>
         </div>
@@ -138,7 +137,7 @@ export function ParticipantSessionView({
 
       {sessionState.stage === 'lobby' ? (
         <div className="panel waiting-panel">
-          A jatek meg nem indult el. Amint a host aktivalja az elso kerdest, itt meg fog
+          A kvíz még nem indult el. Amint a host aktiválja az első kérdést, itt meg fog
           jelenni.
         </div>
       ) : null}
@@ -150,7 +149,7 @@ export function ParticipantSessionView({
               {sessionState.currentQuestionIndex + 1}. kerdes / {sessionState.totalQuestionCount}
             </h3>
             <span className="pill muted">
-              {sessionState.currentQuestion.timeLimitSeconds} mp idolimit
+              {sessionState.currentQuestion.timeLimitSeconds} mp időlimit
             </span>
           </div>
           <p className="question-text">{sessionState.currentQuestion.text}</p>
@@ -165,7 +164,7 @@ export function ParticipantSessionView({
                   onClick={() => handleAnswer(answer.id)}
                 >
                   <span>{answer.text}</span>
-                  {isSelected ? <strong>Leadva</strong> : null}
+                  {isSelected ? <strong>Kiválasztva</strong> : null}
                 </button>
               )
             })}
@@ -173,8 +172,8 @@ export function ParticipantSessionView({
           {!sessionState.canAnswer ? (
             <p className="helper-text">
               {sessionState.viewer?.hasAnsweredCurrentQuestion
-                ? 'Erre a kerdesre mar leadtad a valaszodat.'
-                : 'Most epp nem lehet valaszolni.'}
+                ? 'Erre a kérdésre már leadtad a válaszodat.'
+                : 'Most épp nem lehet válaszolni.'}
             </p>
           ) : null}
         </div>
@@ -186,7 +185,7 @@ export function ParticipantSessionView({
 
       {sessionState.stage === 'finished' ? (
         <div className="panel success-panel">
-          A kviz veget ert. A vegso pontszamod: <strong>{sessionState.viewer?.totalScore ?? 0}</strong>.
+          A kvíz véget ért. A végső pontszámod: <strong>{sessionState.viewer?.totalScore ?? 0}</strong>.
         </div>
       ) : null}
     </section>

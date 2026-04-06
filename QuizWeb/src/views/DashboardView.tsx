@@ -41,8 +41,8 @@ export function DashboardView({
       <div className="panel hero-panel">
         <div>
           <p className="eyebrow">Saját kvízek</p>
-          <h2>Admin dashboard</h2>
-          <p>Innen hozhatsz létre új kvízt, vagy beléphetsz egy már elkészített feladatba.</p>
+          <h2>Kvíz létrehozás / indítás</h2>
+          <p>Innen hozhatsz létre új kvízt, vagy indíthatsz új session-t.</p>
         </div>
         <button className="primary-button" onClick={() => navigate('/quiz/new')}>
           Új kvíz létrehozása

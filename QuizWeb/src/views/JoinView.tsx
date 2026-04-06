@@ -32,11 +32,10 @@ export function JoinView({ onNotice }: { onNotice: (notice: Notice) => void }) {
   return (
     <section className="single-column">
       <div className="panel form-panel">
-        <p className="eyebrow">Résztvevői belépés</p>
         <h2>Csatlakozás aktív kvízhez</h2>
         <form className="form-grid" onSubmit={handleJoin}>
           <label>
-            PIN / Join code
+            PIN / Belépési kód
             <input
               maxLength={6}
               value={joinCode}
@@ -45,7 +44,7 @@ export function JoinView({ onNotice }: { onNotice: (notice: Notice) => void }) {
             />
           </label>
           <label>
-            Nicknév
+            Felhasználónév
             <input
               maxLength={50}
               value={nickname}

@@ -15,7 +15,7 @@ export function ResultsPanel({
           <div className="result-row" key={answer.answerOptionId}>
             <div className="result-copy">
               <strong>{answer.text}</strong>
-              <span>{answer.isCorrect ? 'helyes válasz' : 'válaszlehetőség'}</span>
+              <span>{answer.isCorrect ? 'Helyes válasz' : '---'}</span>
             </div>
           </div>
         ))}

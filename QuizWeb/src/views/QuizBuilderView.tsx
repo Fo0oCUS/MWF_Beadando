@@ -27,8 +27,6 @@ function defaultQuizDraft(): QuizDraft {
         options: [
           { text: '', isCorrect: true },
           { text: '', isCorrect: false },
-          { text: '', isCorrect: false },
-          { text: '', isCorrect: false },
         ],
       },
     ],

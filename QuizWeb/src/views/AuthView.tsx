@@ -37,7 +37,6 @@ export function AuthView({ onLogin }: { onLogin: (session: AuthSession) => void 
       <div className="panel form-panel">
         <div className="panel-header">
           <div>
-            <p className="eyebrow">Admin elérés</p>
             <h2>{title}</h2>
           </div>
           <div className="segmented-control">

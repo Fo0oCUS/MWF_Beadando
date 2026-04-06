@@ -53,7 +53,7 @@ function App() {
     <div className="app-shell">
       <header className="topbar">
         <button className="brand" onClick={() => navigate('/')}>
-          PulseQuiz
+          MWF Kvíz
         </button>
         <nav className="topbar-actions">
           <button className="ghost-button" onClick={() => navigate('/join')}>
@@ -63,7 +63,7 @@ function App() {
             className="ghost-button"
             onClick={() => navigate(authSession ? '/dashboard' : '/auth')}
           >
-            Admin
+            Kvízeim
           </button>
           {authSession ? (
             <button className="primary-button" onClick={handleLogout}>

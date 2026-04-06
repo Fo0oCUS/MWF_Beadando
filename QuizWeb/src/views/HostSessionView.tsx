@@ -57,18 +57,17 @@ export function HostSessionView({
     }
   }
 
-  if (loading) return <div className="panel">Session betöltése...</div>
+  if (loading) return <div className="panel">Kvíz betöltése...</div>
   if (error) return <div className="panel error-panel">{error}</div>
-  if (!sessionState) return <div className="panel error-panel">A session nem található.</div>
+  if (!sessionState) return <div className="panel error-panel">A kvíz nem található.</div>
 
   return (
     <section className="stack-layout">
       <div className="panel hero-panel">
         <div>
-          <p className="eyebrow">Host vezérlő</p>
           <h2>{sessionState.quizTitle}</h2>
           <p>
-            Join code: <strong>{sessionState.joinCode}</strong>
+            PIN kód: <strong>{sessionState.joinCode}</strong>
           </p>
         </div>
         <div className="button-row">
@@ -76,9 +75,9 @@ export function HostSessionView({
             <button
               className="primary-button"
               disabled={busyAction === 'start'}
-              onClick={() => runAction('start', startSession, 'A quiz elindult.')}
+              onClick={() => runAction('start', startSession, 'A kvíz elindult.')}
             >
-              {busyAction === 'start' ? 'Indítás...' : 'Quiz indítása'}
+              {busyAction === 'start' ? 'Indítás...' : 'Kvíz indítása'}
             </button>
           ) : null}
           {sessionState.stage === 'question-open' ? (
@@ -105,17 +104,15 @@ export function HostSessionView({
       <div className="stats-grid">
         <div className="panel">
           <span className="metric-label">Állapot</span>
-          <strong>{formatStage(sessionState.stage)}</strong>
+          <strong> {formatStage(sessionState.stage)}</strong>
         </div>
         <div className="panel">
           <span className="metric-label">Haladás</span>
-          <strong>
-            {Math.max(sessionState.currentQuestionIndex + 1, 0)}/{sessionState.totalQuestionCount}
-          </strong>
+          <strong> {Math.max(sessionState.currentQuestionIndex + 1, 0)}/{sessionState.totalQuestionCount}</strong>
         </div>
         <div className="panel">
           <span className="metric-label">Résztvevők</span>
-          <strong>{sessionState.participantCount}</strong>
+          <strong> {sessionState.participantCount}</strong>
         </div>
       </div>
 
