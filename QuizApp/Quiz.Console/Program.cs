@@ -20,7 +20,7 @@ namespace Quiz.Console
                     services.AddDataAccess(hostContext.Configuration);
                 }).Build();
 
-            host.Start();
+            await host.StartAsync();
             
             using (var scope = host.Services.CreateScope())
             {

@@ -33,9 +33,9 @@ builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo
     {
-        Title = "Cinema API",
+        Title = "Quiz API",
         Version = "v1",
-        Description = "ELTE Cinema API"
+        Description = "MWF Beadando Quiz API"
     });
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
     {
@@ -118,4 +118,4 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-app.Run();
+await app.RunAsync();
