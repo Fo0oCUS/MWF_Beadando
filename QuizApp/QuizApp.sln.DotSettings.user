@@ -1,0 +1,9 @@
+﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=089e23ef_002D4cf1_002D4292_002D8e1c_002Da5968bd93df5/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="All tests from QuizServiceTests.cs" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;Or&gt;&#xD;
+    &lt;ProjectFolder&gt;FDFF17B9-E9E7-48C5-B092-398EAE636F2A/d:UnitTests&lt;/ProjectFolder&gt;&#xD;
+    &lt;ProjectFile&gt;FDFF17B9-E9E7-48C5-B092-398EAE636F2A/d:IntegrationTests/f:QuizServiceIntegrationTests.cs&lt;/ProjectFile&gt;&#xD;
+    &lt;ProjectFile&gt;FDFF17B9-E9E7-48C5-B092-398EAE636F2A/d:IntegrationTests/f:UserControllerIntegrationTests.cs&lt;/ProjectFile&gt;&#xD;
+  &lt;/Or&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Housekeeping/UnitTestingMru/UnitTestRunner/SpawnedProcessesKnownList/=sqlservr_002Eexe/@EntryIndexedValue">KillOrphaned</s:String></wpf:ResourceDictionary>

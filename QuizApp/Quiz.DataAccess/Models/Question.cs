@@ -4,22 +4,17 @@ namespace Quiz.DataAccess.Models;
 
 public class Question
 {
-    [Key] public int Id { get; set; }
+    [Required] public int Id { get; set; }
 
-    public int QuizId { get; set; } 
+    [Required] public int QuizId { get; set; }
     public Quiz? Quiz { get; set; }
 
-    [Required]
-    [MinLength(3)]
-    [MaxLength(255)]
-    public string Text { get; set; } = "";
+    public bool IsOpen { get; set; } = true;
+    
+    [Length(1, 512)]
+    public required string Title { get; set; }
 
-    [Range(1, int.MaxValue)]
-    public int OrderIndex { get; set; }
+    [Length(2, int.MaxValue)] public List<string> Answers { get; set; } = new();
 
-    public int TimeLimitSeconds { get; set; } = 10;
-
-    public ICollection<AnswerOption> AnswerOptions { get; set; } = new List<AnswerOption>();
-
-
+    public int CorrectAnswerIndex { get; set; }
 }

@@ -2,15 +2,8 @@ namespace Shared.Models.Responses;
 
 public class QuestionResponseDto
 {
-    public int Id { get; init; }
-
-    public required QuizResponseDto Quiz { get; init; }
-
-    public required string Text { get; init; }
-
-    public int OrderIndex { get; init; }
-
-    public int TimeLimitSeconds { get; init; }
-
-    public required ICollection<AnswerOptionResponseDto> AnswerOptions { get; init; }
+    public required string Title { get; set; }
+    public required List<string> Answers { get; set; }
+    public int CorrectAnswerIndex { get; set; }
+    public bool IsOpen { get; set; }
 }

@@ -19,23 +19,20 @@ public static class DependencyInjection
         
         services.AddIdentity<AppUser, UserRole>(options =>
             {
-                // // Password settings.
-                // options.Password.RequiredLength = 6;
-                //
-                // // Lockout settings.
-                // options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
-                // options.Lockout.MaxFailedAccessAttempts = 5;
-                // options.Lockout.AllowedForNewUsers = true;
-                // options.User.RequireUniqueEmail = true;
+                // Password settings.
+                options.Password.RequiredLength = 6;
+                
+                // Lockout settings.
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+                options.Lockout.MaxFailedAccessAttempts = 5;
+                options.Lockout.AllowedForNewUsers = true;
+                options.User.RequireUniqueEmail = true;
             })
             .AddEntityFrameworkStores<QuizAppDbContext>()
             .AddDefaultTokenProviders();
         services.AddHttpContextAccessor();
         services.AddScoped<IUserService, UserService>();
         services.AddScoped<IQuizService, QuizService>();
-        services.AddScoped<ISessionParticipantService, SessionParticipantService>();
-        services.AddScoped<IQuizSessionService, QuizSessionService>();
-        services.AddScoped<IParticipantAnswerService, ParticipantAnswerService>();
         
         return services;
     }

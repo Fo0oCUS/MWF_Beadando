@@ -8,5 +8,5 @@ public class AppUserResponseDto
     
     public required string Email { get; init; }
     
-    public  required ICollection<QuizResponseDto> CreatedQuizzes { get; init; }
+    public  required List<QuizResponseDto> CreatedQuizzes { get; init; }
 }

@@ -4,11 +4,15 @@ using System.Reflection;
 using System.Text;
 using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Quiz.DataAccess;
+using Quiz.DataAccess.Models;
+using Quiz.DataAccess.Services;
 using Quiz.DataAccess.Services.Config;
+using QuizApp.WebApi.Hubs;
 using QuizApp.WebApi.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -61,16 +65,6 @@ builder.Services.AddSwaggerGen(c =>
 
 builder.Services.AddDataAccess(builder.Configuration);
 builder.Services.AddAuthorization();
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("QuizWeb", policy =>
-    {
-        policy
-            .WithOrigins("http://localhost:5173", "https://localhost:5173")
-            .AllowAnyHeader()
-            .AllowAnyMethod();
-    });
-});
 
 var jwtSection = builder.Configuration.GetSection("JwtSettings");
 var jwtSettings = jwtSection.Get<JwtSettings>() ?? throw new ArgumentNullException(nameof(JwtSettings));
@@ -94,10 +88,9 @@ builder.Services.AddAuthentication(options =>
 
 
 builder.Services.AddAutomapper();
-
+builder.Services.AddSignalR();
 builder.Services.AddProblemDetails();
 builder.Services.AddExceptionHandler<ExceptionToProblemDetailsHandler>();
-
 
 var app = builder.Build();
 
@@ -106,16 +99,40 @@ app.UseStatusCodePages();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment()) {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    // app.UseSwagger();
+    // app.UseSwaggerUI();
 }
 
+
 app.UseHttpsRedirection();
-app.UseCors("QuizWeb");
 
 app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.MapHub<QuizHub>("/hubs/quiz");
+
+var host = Host.CreateDefaultBuilder(args)
+    .ConfigureAppConfiguration((_, config) => {
+        config.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+        config.AddUserSecrets<Program>();
+    })
+    .ConfigureServices((hostContext, services) => {
+        services.AddDataAccess(hostContext.Configuration);
+    }).Build();
+
+await host.StartAsync();
+            
+using (var scope = host.Services.CreateScope())
+{
+    var context = scope.ServiceProvider.GetRequiredService<QuizAppDbContext>();
+                
+    var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<UserRole>>();
+    var userManager = scope.ServiceProvider.GetRequiredService<UserManager<AppUser>>();
+                
+    await DbInitializer.Initialize(context, roleManager, userManager);
+}
+
 
 await app.RunAsync();

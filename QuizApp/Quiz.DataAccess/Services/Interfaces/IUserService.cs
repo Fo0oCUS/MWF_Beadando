@@ -11,8 +11,5 @@ public interface IUserService
     Task LogoutAsync();
     Task<AppUser?> GetCurrentUserAsync();
     string? GetCurrentUserId();
-    public List<Role> GetCurrentUserRoles();
-    public bool IsCurrentUserAdmin();
-    public bool CurrentUserOrAdmin(string userId);
-    Task<AppUser> GetUserByIdAsync(string id);
+    public Task<AppUser> GetUserByIdAsync(string id);
 }

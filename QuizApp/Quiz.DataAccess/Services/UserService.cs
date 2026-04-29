@@ -107,17 +107,12 @@ public class UserService : IUserService
         if (user == null)
             throw new AccessViolationException("User doesn't exist.");
         
-        if (!CurrentUserOrAdmin(id))
+        if (id != GetCurrentUserId())
         {
             throw new AccessViolationException("User not accessible");
         }
 
         return user;
-    }
-
-    public bool CurrentUserOrAdmin(string userId)
-    {
-        return IsCurrentUserAdmin() || userId == GetCurrentUserId();
     }
     
     public List<Role> GetCurrentUserRoles()
@@ -132,13 +127,6 @@ public class UserService : IUserService
             .ToList();
 
         return roles.Select(Enum.Parse<Role>).ToList();
-    }
-
-    public bool IsCurrentUserAdmin()
-    {
-        var roles = GetCurrentUserRoles();
-
-        return roles.Contains(Role.Admin);
     }
     
     private async Task<string> GenerateJwtTokenAsync(AppUser user)

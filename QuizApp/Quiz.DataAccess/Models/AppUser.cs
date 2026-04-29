@@ -11,5 +11,5 @@ public class AppUser : IdentityUser
     
     public Guid? RefreshToken { get; set; }
     
-    public ICollection<Quiz> CreatedQuizzes { get; set; } = new List<Quiz>();
+    public List<Quiz> CreatedQuizzes { get; set; } = new List<Quiz>();
 }

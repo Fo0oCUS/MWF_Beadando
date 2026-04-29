@@ -128,36 +128,6 @@ namespace Quiz.DataAccess.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("Quiz.DataAccess.Models.AnswerOption", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<bool>("IsCorrect")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("OrderIndex")
-                        .HasColumnType("int");
-
-                    b.Property<int>("QuestionId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Text")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("QuestionId", "OrderIndex")
-                        .IsUnique();
-
-                    b.ToTable("AnswerOptions");
-                });
-
             modelBuilder.Entity("Quiz.DataAccess.Models.AppUser", b =>
                 {
                     b.Property<string>("Id")
@@ -231,47 +201,6 @@ namespace Quiz.DataAccess.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("Quiz.DataAccess.Models.ParticipantAnswer", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("AnswerOptionId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("AnsweredAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("AwardedPoints")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("IsCorrect")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("QuestionId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ResponseTimeMs")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SessionParticipantId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AnswerOptionId");
-
-                    b.HasIndex("QuestionId");
-
-                    b.HasIndex("SessionParticipantId", "QuestionId")
-                        .IsUnique();
-
-                    b.ToTable("ParticipantAnswers");
-                });
-
             modelBuilder.Entity("Quiz.DataAccess.Models.Question", b =>
                 {
                     b.Property<int>("Id")
@@ -280,24 +209,26 @@ namespace Quiz.DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("OrderIndex")
+                    b.Property<string>("Answers")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("CorrectAnswerIndex")
                         .HasColumnType("int");
+
+                    b.Property<bool>("IsOpen")
+                        .HasColumnType("bit");
 
                     b.Property<int>("QuizId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Text")
+                    b.Property<string>("Title")
                         .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
-
-                    b.Property<int>("TimeLimitSeconds")
-                        .HasColumnType("int");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("QuizId", "OrderIndex")
-                        .IsUnique();
+                    b.HasIndex("QuizId");
 
                     b.ToTable("Questions");
                 });
@@ -310,111 +241,38 @@ namespace Quiz.DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("CreatedByUserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("CurrentQuestionIndex")
+                        .HasColumnType("int");
 
                     b.Property<bool>("IsPublished")
                         .HasColumnType("bit");
 
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CreatedByUserId");
-
-                    b.ToTable("Quizzes");
-                });
-
-            modelBuilder.Entity("Quiz.DataAccess.Models.QuizSession", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("CurrentQuestionIndex")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("EndedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("HostUserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("JoinCode")
-                        .IsRequired()
-                        .HasMaxLength(6)
-                        .HasColumnType("nvarchar(6)");
-
-                    b.Property<int>("QuizId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("QuizSessionStatus")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("StartedAt")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("HostUserId");
-
-                    b.HasIndex("JoinCode")
-                        .IsUnique();
-
-                    b.HasIndex("QuizId");
-
-                    b.ToTable("QuizSessions");
-                });
-
-            modelBuilder.Entity("Quiz.DataAccess.Models.SessionParticipant", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("ConnectionId")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("IsConnected")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsHost")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime>("JoinedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Nickname")
+                    b.Property<string>("Messages")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("QuizSessionId")
+                    b.Property<string>("Players")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Status")
                         .HasColumnType("int");
 
-                    b.Property<int>("TotalScore")
-                        .HasColumnType("int");
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("UserId");
 
-                    b.HasIndex("QuizSessionId", "Nickname")
-                        .IsUnique();
-
-                    b.ToTable("SessionParticipants");
+                    b.ToTable("Quizzes");
                 });
 
             modelBuilder.Entity("Quiz.DataAccess.Models.UserRole", b =>
@@ -495,44 +353,6 @@ namespace Quiz.DataAccess.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Quiz.DataAccess.Models.AnswerOption", b =>
-                {
-                    b.HasOne("Quiz.DataAccess.Models.Question", "Question")
-                        .WithMany("AnswerOptions")
-                        .HasForeignKey("QuestionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Question");
-                });
-
-            modelBuilder.Entity("Quiz.DataAccess.Models.ParticipantAnswer", b =>
-                {
-                    b.HasOne("Quiz.DataAccess.Models.AnswerOption", "AnswerOption")
-                        .WithMany()
-                        .HasForeignKey("AnswerOptionId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("Quiz.DataAccess.Models.Question", "Question")
-                        .WithMany()
-                        .HasForeignKey("QuestionId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("Quiz.DataAccess.Models.SessionParticipant", "SessionParticipant")
-                        .WithMany("ParticipantAnswers")
-                        .HasForeignKey("SessionParticipantId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("AnswerOption");
-
-                    b.Navigation("Question");
-
-                    b.Navigation("SessionParticipant");
-                });
-
             modelBuilder.Entity("Quiz.DataAccess.Models.Question", b =>
                 {
                     b.HasOne("Quiz.DataAccess.Models.Quiz", "Quiz")
@@ -546,48 +366,11 @@ namespace Quiz.DataAccess.Migrations
 
             modelBuilder.Entity("Quiz.DataAccess.Models.Quiz", b =>
                 {
-                    b.HasOne("Quiz.DataAccess.Models.AppUser", "CreatedByUser")
-                        .WithMany("CreatedQuizzes")
-                        .HasForeignKey("CreatedByUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("CreatedByUser");
-                });
-
-            modelBuilder.Entity("Quiz.DataAccess.Models.QuizSession", b =>
-                {
-                    b.HasOne("Quiz.DataAccess.Models.AppUser", "HostUser")
-                        .WithMany()
-                        .HasForeignKey("HostUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Quiz.DataAccess.Models.Quiz", "Quiz")
-                        .WithMany()
-                        .HasForeignKey("QuizId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.Navigation("HostUser");
-
-                    b.Navigation("Quiz");
-                });
-
-            modelBuilder.Entity("Quiz.DataAccess.Models.SessionParticipant", b =>
-                {
-                    b.HasOne("Quiz.DataAccess.Models.QuizSession", "QuizSession")
-                        .WithMany("Participants")
-                        .HasForeignKey("QuizSessionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Quiz.DataAccess.Models.AppUser", "User")
-                        .WithMany()
+                        .WithMany("CreatedQuizzes")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.NoAction);
-
-                    b.Navigation("QuizSession");
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("User");
                 });
@@ -597,24 +380,9 @@ namespace Quiz.DataAccess.Migrations
                     b.Navigation("CreatedQuizzes");
                 });
 
-            modelBuilder.Entity("Quiz.DataAccess.Models.Question", b =>
-                {
-                    b.Navigation("AnswerOptions");
-                });
-
             modelBuilder.Entity("Quiz.DataAccess.Models.Quiz", b =>
                 {
                     b.Navigation("Questions");
-                });
-
-            modelBuilder.Entity("Quiz.DataAccess.Models.QuizSession", b =>
-                {
-                    b.Navigation("Participants");
-                });
-
-            modelBuilder.Entity("Quiz.DataAccess.Models.SessionParticipant", b =>
-                {
-                    b.Navigation("ParticipantAnswers");
                 });
 #pragma warning restore 612, 618
         }
