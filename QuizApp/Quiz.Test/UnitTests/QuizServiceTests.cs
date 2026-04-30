@@ -10,7 +10,7 @@ using Quiz.DataAccess.Services.Interfaces;
 namespace Quiz.Test.UnitTests;
 
 [TestClass]
-public class QuizServiceTests
+public class QuizServiceTests : IDisposable, IAsyncDisposable
 {
     private QuizAppDbContext _context = null!;
     private QuizService _quizService = null!;
@@ -705,5 +705,16 @@ public class QuizServiceTests
     {
         _context.Database.EnsureDeleted();
         _context.Dispose();
+    }
+
+    public void Dispose()
+    {
+        _context.Database.EnsureDeleted();
+        _context.Dispose();
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        await _context.DisposeAsync();
     }
 }
